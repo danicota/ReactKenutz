@@ -1,7 +1,6 @@
 import React from "react";
 
 const ProductItem = (props) => {
-
   const mappedInputs = props.nutSize.map((size) => (
     <li>
       <label>
@@ -20,38 +19,40 @@ const ProductItem = (props) => {
 
   return (
     <article class="product">
-      <header>
-        <img
-          class="productImage"
-          src={props.productImage}
-          alt="Product"
-        />
-        <h3>{props.nutKind}</h3>
-        <data value="39">
-          <del>${props.oldPrice}</del> <ins>${props.nutPrice}</ins>
-        </data>
-        <p>{props.nutDescription}</p>
-        <dl>
-          <dt>Rating</dt>
-          <div style={{ marginTop: "10px" }}> {stars()} </div>
-        </dl>
+      <img class="productImage" src={props.productImage} alt="Product" />
+      <h3>{props.nutKind}</h3>
+      <data value="39">
+        <del>${props.oldPrice}</del> <ins>${props.nutPrice}</ins>
+      </data>
+      <p>{props.nutDescription}</p>
+      <dl>
+        <dt>Rating</dt>
+        <div style={{ marginTop: "10px" }}> {stars()} </div>
+      </dl>
 
-        <div class="seeMore">
-          <div>See more</div>
-        </div>
-      </header>
       <form>
         <fieldset>
           <legend>Sizes</legend>
-          <ol>{mappedInputs}</ol>
+          <ol className="product-sizes">{mappedInputs}</ol>
         </fieldset>
       </form>
       <footer>
-        <button type="button">
+        <button
+          onClick={() => {
+            props.addToCart(props.nutKind, props.nutPrice);
+          }}
+          type="button"
+        >
           <i class="far fa-shopping-cart"></i>
           Add to Cart
         </button>
-        <button type="button">
+        <button
+          className={props.favorite === "true" ? "red-text" : null}
+          type="button"
+          onClick={() => {
+            props.toggleFavorite(props.product);
+          }}
+        >
           <i class="fas fa-heart"></i>
         </button>
       </footer>

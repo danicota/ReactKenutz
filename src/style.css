@@ -16,8 +16,36 @@ html {
     font-family: Arial, Helvetica, sans-serif;
 }
 
+ol{
+    padding:0;
+}
+
+.paginationItems{
+    cursor: pointer;
+}
+
+.product-sizes li{
+    display: inline;
+    margin-right: 5px;
+}
+
+.filter-list {
+    margin: 0;
+    padding: 0;
+}
+
+.filter-list li {
+    display: inline;
+    margin-right: 10px;
+}
+
 fieldset{
+    padding: 0;
     border:none;
+}
+
+.red-text{
+    color: red;
 }
 
 .wrapper {
@@ -34,7 +62,7 @@ fieldset{
 }
 
 .page-header  {
-    /* background-image: linear-gradient(rgba(255,255,255,0.5), rgba(255,255,255,0.1)),url("https://raw.githubusercontent.com/danicota/ecomm-store-project/master/img/nuts-73914_1920.jpg"); */
+    background-image: linear-gradient(rgba(255,255,255,0.5), rgba(255,255,255,0.1)),url("https://raw.githubusercontent.com/danicota/ecomm-store-project/master/img/nuts-73914_1920.jpg");
     background-blend-mode: gray;
     background-size: cover;
     text-align: center;
@@ -69,9 +97,14 @@ a {
     align-items: center;
     padding: 0px 300px 0px 300px;
     background-color: var(--primary-color-3);
-    position: static;
+    position: static;   
     bottom: 0px;
 
+}
+
+.menu-link{
+    color: #a1beca;
+    cursor: pointer;
 }
 
 .menu-li {
@@ -142,7 +175,7 @@ a {
 .grid-container {
 display: grid;
 grid-template-columns: auto auto auto;
-background-color: lightgray;
+background-color: #f2f5ff;
 justify-content: center;
 padding: 15px;
 grid-gap: var(--pad-and-gap)

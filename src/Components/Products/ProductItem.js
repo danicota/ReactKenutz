@@ -20,15 +20,16 @@ const ProductItem = (props) => {
   return (
     <article class="product">
       <img class="productImage" src={props.productImage} alt="Product" />
-      <h3>{props.nutKind}</h3>
-      <data value="39">
-        <del>${props.oldPrice}</del> <ins>${props.nutPrice}</ins>
-      </data>
-      <p>{props.nutDescription}</p>
-      <dl>
+      <h3 style={{ margin: 0 }}>{props.nutKind}</h3>
+      <div value="39">
+        {/* <del>${props.oldPrice}</del>  */}
+        <div>${props.nutPrice}</div>
+      </div>
+      {/* <p>{props.nutDescription}</p> */}
+      <div style={{ margin: 0 }}>
         <dt>Rating</dt>
         <div style={{ marginTop: "10px" }}> {stars()} </div>
-      </dl>
+      </div>
 
       <form>
         <fieldset>

@@ -243,7 +243,7 @@ function Shop() {
     const prodList = [...userInput.productsList];
 
     handleSetData({
-      filteredProductsList: prodList.slice(page * 2, page * 2 + 2),
+      filteredProductsList: prodList.slice(page * 6, page * 6 + 6),
     });
   };
   const paginationHandler = (value) => {
@@ -251,7 +251,7 @@ function Shop() {
   };
   const mappedPagination = () => {
     const pages = [];
-    let numberOfPages = userInput.productsList.length / 2;
+    let numberOfPages = userInput.productsList.length / 6;
     for (let index = 0; index < numberOfPages; index++) {
       pages.push(
         <li

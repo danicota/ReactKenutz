@@ -111,7 +111,7 @@ function Cart() {
 
         <h1>Cart</h1>
         <ul>{mappedProds}</ul>
-        <h2 style={{color: "#16398c"}}>Total: {totalPrice()}</h2>
+        <h2 style={{color: "#16398c"}}>Total: ${totalPrice()}</h2>
       </div>
     </React.Fragment>
   );

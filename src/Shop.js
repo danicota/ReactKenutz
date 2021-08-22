@@ -2,12 +2,8 @@ import axios from "axios";
 import React, { useState, useEffect } from "react";
 import ProductItem from "./Components/Products/ProductItem";
 import WeightList from "./Components/WeightList";
-import NutsTypes from "./Components/NutsTypes";
-import RatingFilter from "./Components/RatingFilter";
 import Footer from "./Components/Footer";
 import SortFilter from "./Components/SortFilter";
-import Navbar from "./Components/Navbar";
-import SearchComponent from "./Components/SearchComponent";
 import { useHistory } from "react-router-dom";
 
 function Shop() {
@@ -16,6 +12,7 @@ function Shop() {
   const [userInput, setUserInput] = useState({
     productsList: [],
     filteredProductsList: [],
+    kenutzCart: [],
     loading: false,
   });
 
@@ -33,10 +30,12 @@ function Shop() {
       handleSetData({ loading: true });
 
       const kenutzProducts = await fetchKenutzProducts();
+      const kenutzCart = await fetchKenutzCart();
 
       handleSetData({
         filteredProductsList: kenutzProducts,
         productsList: [...kenutzProducts],
+        kenutzCart: [...kenutzCart],
         loading: false,
       });
     };
@@ -49,6 +48,19 @@ function Shop() {
   function fetchKenutzProducts() {
     return axios
       .get(`https://vue-http-demo-d1da5.firebaseio.com/kenutz.json`)
+      .then((res) => {
+        const products = [];
+        for (const id in res.data) {
+          products.push({ ...res.data[id], id: id });
+        }
+        console.log(products);
+        return products;
+      });
+  }
+
+  function fetchKenutzCart() {
+    return axios
+      .get(`https://vue-http-demo-d1da5.firebaseio.com/kenutzCart.json`)
       .then((res) => {
         const products = [];
         for (const id in res.data) {
@@ -177,7 +189,7 @@ function Shop() {
       })
       .then(() => {
         handleSetData({ loading: false });
-        history.push("/cart");
+        window.location.href = "/cart";
       });
   };
 
@@ -255,7 +267,7 @@ function Shop() {
     for (let index = 0; index < numberOfPages; index++) {
       pages.push(
         <li
-        className="paginationItems"
+          className="paginationItems"
           style={{ marginLeft: "10px", display: "inline" }}
           onClick={() => paginationHandler(index)}
         >
@@ -272,17 +284,20 @@ function Shop() {
         <main className="products">
           <form
             className="filters"
-            style={{ display: "grid", grid: "inherit", marginTop:'50px', marginBottom:'40px' }}
+            style={{
+              display: "grid",
+              grid: "inherit",
+              marginTop: "50px",
+              marginBottom: "40px",
+            }}
           >
-            <div className="filter-options" style={{padding:'0px'}}>
+            <div className="filter-options" style={{ padding: "0px" }}>
               <WeightList filterHandler={filterHandler} />
             </div>
             <SortFilter sortHandler={sortHandler} />
           </form>
 
-          <div className="grid-container">
-            {mappedProds}
-          </div>
+          <div className="grid-container">{mappedProds}</div>
 
           <p style={{ textAlign: "center" }}>
             {userInput.filteredProductsList.length} products found
@@ -293,13 +308,13 @@ function Shop() {
           </div>
 
           <p
-            style={{ textAlign: "center", fontSize: "14px", cursor:"pointer" }}
+            style={{ textAlign: "center", fontSize: "14px", cursor: "pointer" }}
             onClick={sorTestReset}
           >
             See all products
           </p>
         </main>
- 
+
         <Footer />
       </div>
     </React.Fragment>

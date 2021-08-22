@@ -8,6 +8,8 @@ import Navbar from "./Components/Navbar";
 import SearchComponent from "./Components/SearchComponent";
 import "./style.css";
 import "./reset.css";
+import ProductDetail from "./Components/Products/ProductDetail";
+import Contact from "./Contact";
 
 function App() {
   return (
@@ -44,6 +46,12 @@ function App() {
       </Route>
       <Route path="/favorites">
         <Favorites />
+      </Route>
+      <Route path="/product/:productId">
+        <ProductDetail />
+      </Route>
+      <Route path="/contact">
+        <Contact />
       </Route>
     </div>
   );

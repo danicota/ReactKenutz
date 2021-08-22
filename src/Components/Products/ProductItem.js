@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const ProductItem = (props) => {
   const mappedInputs = props.nutSize.map((size) => (
@@ -41,6 +42,7 @@ const ProductItem = (props) => {
         <button
           onClick={() => {
             props.addToCart(props.nutKind, props.nutPrice);
+            
           }}
           type="button"
         >
@@ -56,6 +58,18 @@ const ProductItem = (props) => {
         >
           <i class="fas fa-heart"></i>
         </button>
+        <Link to={`/product/${props.product_id}`}>
+          <p
+            style={{
+              textAlign: "center",
+              marginTop: 40,
+              color: "#16398c",
+              cursor: "pointer",
+            }}
+          >
+            Read more{" "}
+          </p>
+        </Link>
       </footer>
     </article>
   );

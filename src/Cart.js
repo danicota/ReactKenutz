@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { useHistory } from "react-router-dom";
 
 function Cart() {
+  let history = useHistory();
+
   const [userInput, setUserInput] = useState({
     productsList: [],
     loading: false,
@@ -45,12 +48,47 @@ function Cart() {
         return products;
       });
   }
+  function deleteProductFromCart(productId) {
+    return axios
+      .delete(
+        `https://vue-http-demo-d1da5.firebaseio.com/kenutzCart/${productId}.json`
+      )
+      .then((res) => {
+        window.location.reload();
+      });
+  }
 
   const mappedProds = userInput.productsList.map((prod) => (
     <li>
-      <p>{prod.product}</p>
-      <p>Price: ${prod.price}</p>
-      <hr/>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          flexWrap: "wrap",
+          alignItems: "center",
+        }}
+      >
+        <div>
+          <p>{prod.product}</p>
+          <p>Price: ${prod.price}</p>
+        </div>
+        <div>
+          <button
+          onClick={()=>{deleteProductFromCart(prod.id)}}
+            style={{
+              background: "#16398c",
+              color: "#fff",
+              padding: "10px 55px",
+              borderRadius: "11px",
+              fontSize: "15px",
+              cursor: "pointer",
+            }}
+          >
+            Delete
+          </button>
+        </div>
+      </div>
+      <hr />
     </li>
   ));
 

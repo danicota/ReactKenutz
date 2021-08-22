@@ -2,7 +2,7 @@ import React from "react";
 
 const SearchComponent = (props) => {
   return (
-    <div class="top-container">
+    <div class="top-container" style={{marginBottom:"50px"}}>
       <form class="search">
         <label>
           Search
@@ -12,19 +12,6 @@ const SearchComponent = (props) => {
           <span class="material-icons">search</span>
         </button>
       </form>
-
-      <ul class="your-products">
-        <li>
-            <span class="material-icons" aria-label="Favourites">
-              favorite
-            </span>
-        </li>
-        <li>
-            <span class="material-icons" aria-label="Items in your cart">
-              shopping_cart
-            </span>
-        </li>
-      </ul>
     </div>
   );
 };

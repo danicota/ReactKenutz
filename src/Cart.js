@@ -10,6 +10,15 @@ function Cart() {
     loading: false,
   });
 
+  const totalPrice = () => {
+    let total = 0;
+    for (let i = 0; i < userInput.productsList.length; i++) {
+      total += userInput.productsList[i].price;
+    }
+
+    return total;
+  };
+
   const handleSetData = (payload) => {
     setUserInput((prevState) => {
       return {
@@ -48,6 +57,7 @@ function Cart() {
         return products;
       });
   }
+
   function deleteProductFromCart(productId) {
     return axios
       .delete(
@@ -74,7 +84,9 @@ function Cart() {
         </div>
         <div>
           <button
-          onClick={()=>{deleteProductFromCart(prod.id)}}
+            onClick={() => {
+              deleteProductFromCart(prod.id);
+            }}
             style={{
               background: "#16398c",
               color: "#fff",
@@ -99,6 +111,7 @@ function Cart() {
 
         <h1>Cart</h1>
         <ul>{mappedProds}</ul>
+        <h2 style={{color: "#16398c"}}>Total: {totalPrice()}</h2>
       </div>
     </React.Fragment>
   );
